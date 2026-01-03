@@ -73,7 +73,7 @@ function Dashboard() {
   return (
     <>
     <div className='upper flex flex-col md:flex-row justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
-        <h5 className='text-2xl'>CRUD on Tasks</h5>
+        <h5 className='text-xl md:text-2xl'>CRUD on Tasks</h5>
         <input type="text" className='m-2 p-2 w-full border border-gray-400 rounded-lg text-black font-bold ' value={title} onChange={(e)=>setTitle(e.target.value)}  placeholder='Title'/>
         <textarea name=" description" className='m-2 h-30 w-full p-2 border border-gray-400 rounded-lg' value={description} onChange={(e)=>setDescription(e.target.value)} placeholder='description' ></textarea>
         <div className='flex flex-row justify-around w-full '> 
@@ -97,46 +97,49 @@ function Dashboard() {
                 <option value="complete">complete</option>
                 </select>
             </div>
-        </div>
+        </div >
+        <div className='flex flex-wrap gap-2 mt-2'>
         {
             (!editItem)?
-            <div className='flex flex-wrap gap-1'>
+            <>
                 <button onClick={createTask} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>create</button>
                 <button onClick={()=>setFetch(true)} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3  border-2 border-gray-400 rounded-lg text-black font-bold'>fetch</button>
-                </div>
-            :<div className='flex flex-wrap gap-3'>
+            </>
+            :<>
                 <button onClick={updateTask} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>update</button>
                 <button onClick={discardChange} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>discard</button>
-            </div>
+            </>
         }
+        </div>
         
         
     </div>
     {
 
     fetch?
-    <div className='lower overflow-x-auto flex flex-col justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
+    <div className='lower h-auto flex flex-col justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
         <h5 className='text-xl md:text-2xl font-bold'>Tasks List</h5>
+        <div className="overflow-x-auto w-full">
         <table className='border border-gray-300 min-w-full '>
             <thead className=' '>
-                <tr className='flex text-2xl font-bold justify-between m-0.5 p-2'>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Due Date</th>
-                <th>priority</th>
-                <th>status</th>
-                <th>options</th>
+                <tr className='flex md:text-2xl font-bold justify-between m-0.5 p-2'>
+                <th className='p-2 border'>Title</th>
+                <th className='p-2 border'>Description</th>
+                <th className='p-2 border'>Due Date</th>
+                <th className='p-2 border'>priority</th>
+                <th className='p-2 border'>status</th>
+                <th className='p-2 border'>options</th>
                 </tr>
             </thead>
             <tbody className=''>
                 {
-                items.map((it)=>(<tr key={it._id} className='flex text-base md:text-2xl flex-wrap-col font-bold justify-between m-0.5 p-2'>
-                    <td className='max-w-8'>{it.title}</td>
-                    <td className='max-w-8'>{it.description}</td>
-                    <td>{new Date(it.dueDate).toLocaleDateString()}</td>
-                    <td>{it.priority}</td>
-                    <td>{it.status}</td>
-                    <td><div className='flex flex-wrap gap-2'>
+                items.map((it)=>(<tr key={it._id} className='flex text-base md:text-base flex-wrap-col justify-between m-0.5 p-2'>
+                    <td className='p-2 wrap-break-word'>{it.title}</td>
+                    <td className='p-2 wrap-break-word'>{it.description}</td>
+                    <td className='p-2'>{new Date(it.dueDate).toLocaleDateString()}</td>
+                    <td className='p-2'>{it.priority}</td>
+                    <td className='p-2' >{it.status}</td>
+                    <td><div className='flex p-2 flex-wrap gap-2'>
                         <button onClick={()=>editTask(it)} className='p-1 hover:opacity-50 hover:cursor-pointer border border-gray-400 rounded-lg text-black font-bold'>edit</button>
                         <button onClick={()=>deleteTask(it._id)} className='p-1 hover:opacity-50 hover:cursor-pointer border border-gray-400 rounded-lg text-black font-bold'>delete</button>
                         </div>
@@ -147,8 +150,10 @@ function Dashboard() {
                 
             </tbody>
         </table>
+        </div>
     </div>:<div></div>
     }
+    
     </>
   )
 }
