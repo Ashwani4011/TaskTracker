@@ -72,12 +72,11 @@ function Dashboard() {
     
   return (
     <>
-    <div className='upper flex flex-col justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
+    <div className='upper flex flex-col md:flex-row justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
         <h5 className='text-2xl'>CRUD on Tasks</h5>
         <input type="text" className='m-2 p-2 w-full border border-gray-400 rounded-lg text-black font-bold ' value={title} onChange={(e)=>setTitle(e.target.value)}  placeholder='Title'/>
         <textarea name=" description" className='m-2 h-30 w-full p-2 border border-gray-400 rounded-lg' value={description} onChange={(e)=>setDescription(e.target.value)} placeholder='description' ></textarea>
-        <div className='flex flex-row justify-around w-full '>
-            
+        <div className='flex flex-row justify-around w-full '> 
             <div className='m-2 p-2 w-[1/3]'>
                 <label >Due Date : </label>
                 <input type="date" className='m-1 p-1 border border-gray-400 rounded-lg text-black ' value={dueDate} onChange={(e)=>setDueDate(e.target.value)} />
@@ -101,11 +100,11 @@ function Dashboard() {
         </div>
         {
             (!editItem)?
-            <div className='flex flex-row gap-1'>
+            <div className='flex flex-wrap gap-1'>
                 <button onClick={createTask} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>create</button>
                 <button onClick={()=>setFetch(true)} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3  border-2 border-gray-400 rounded-lg text-black font-bold'>fetch</button>
                 </div>
-            :<div className='flex flex-row gap-3'>
+            :<div className='flex flex-wrap gap-3'>
                 <button onClick={updateTask} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>update</button>
                 <button onClick={discardChange} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>discard</button>
             </div>
@@ -116,9 +115,9 @@ function Dashboard() {
     {
 
     fetch?
-    <div className='lower h-auto flex flex-col justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
-        <h5 className='text-2xl font-bold'>Tasks List</h5>
-        <table className='border border-gray-300 w-full '>
+    <div className='lower overflow-x-auto flex flex-col justify-center items-center border-2 border-gray-400 m-2 p-4 w-full'>
+        <h5 className='text-xl md:text-2xl font-bold'>Tasks List</h5>
+        <table className='border border-gray-300 min-w-full '>
             <thead className=' '>
                 <tr className='flex text-2xl font-bold justify-between m-0.5 p-2'>
                 <th>Title</th>
@@ -131,13 +130,13 @@ function Dashboard() {
             </thead>
             <tbody className=''>
                 {
-                items.map((it)=>(<tr key={it._id} className='flex  flex-wrap-col text-2xl font-bold justify-between m-0.5 p-2'>
+                items.map((it)=>(<tr key={it._id} className='flex text-base md:text-2xl flex-wrap-col font-bold justify-between m-0.5 p-2'>
                     <td className='max-w-8'>{it.title}</td>
                     <td className='max-w-8'>{it.description}</td>
                     <td>{new Date(it.dueDate).toLocaleDateString()}</td>
                     <td>{it.priority}</td>
                     <td>{it.status}</td>
-                    <td><div className='flex flex-row gap-2'>
+                    <td><div className='flex flex-wrap gap-2'>
                         <button onClick={()=>editTask(it)} className='p-1 hover:opacity-50 hover:cursor-pointer border border-gray-400 rounded-lg text-black font-bold'>edit</button>
                         <button onClick={()=>deleteTask(it._id)} className='p-1 hover:opacity-50 hover:cursor-pointer border border-gray-400 rounded-lg text-black font-bold'>delete</button>
                         </div>
