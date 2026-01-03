@@ -73,7 +73,7 @@ function Dashboard() {
   return (
     <>
     <div className='upper flex flex-col justify-center items-center border-2 border-gray-400 m-2 ml-0 p-4 w-full'>
-        <h5 className='text-xl md:text-2xl'>CRUD on Tasks</h5>
+        <h5 className='text-xl md:text-2xl font-bold'>CRUD on Tasks</h5>
         <input type="text" className='m-2 p-2 w-full border border-gray-400 rounded-lg text-black font-bold ' value={title} onChange={(e)=>setTitle(e.target.value)}  placeholder='Title'/>
         <textarea name=" description" className='m-2 h-30 w-full p-2 border border-gray-400 rounded-lg' value={description} onChange={(e)=>setDescription(e.target.value)} placeholder='description' ></textarea>
         <div className='flex flex-col md:flex-row justify-around w-full '> 
