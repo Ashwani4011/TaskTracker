@@ -6,7 +6,7 @@ function Dashboard() {
     const [title,setTitle]=useState("");
     const [description,setDescription]=useState("");
     const [editItem,setEditItem]=useState(false);
-    const [fetch,setFetch]=useState(true);
+    const [fetch,setFetch]=useState(false);
     const [dueDate,setDueDate]=useState("");
     const [priority,setPriority]=useState("low");
     const [status,setStatus]=useState("pending");
@@ -58,7 +58,7 @@ function Dashboard() {
     const deleteTask=async (id)=>{
          if (!confirm("Delete this item?")) return;
         await api.delete(`/tasks/${id}`);
-        setItems(items.filter((it) => it.id !== id));
+        setItems(items.filter((it) => it._id !== id));
     }
     const editTask=(item)=>{
         setEditItem(true);
@@ -103,7 +103,11 @@ function Dashboard() {
             (!editItem)?
             <>
                 <button onClick={createTask} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>create</button>
-                <button onClick={()=>setFetch(true)} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3  border-2 border-gray-400 rounded-lg text-black font-bold'>fetch</button>
+                {
+                    !fetch?<button onClick={()=>setFetch(!fetch)} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>fetch list</button>
+                :
+                <button onClick={()=>setFetch(!fetch)} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>erase list</button>
+                }
             </>
             :<>
                 <button onClick={updateTask} className='hover:opacity-50 hover:cursor-pointer m-1 p-1 px-3 border-2 border-gray-400 rounded-lg text-black font-bold'>update</button>
