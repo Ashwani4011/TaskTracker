@@ -155,7 +155,9 @@ function Dashboard() {
             </tbody>
         </table>
         </div>
-    </div>:<div></div>
+    </div>:<div className='lower ml-0 font-bold border-2 border-gray-400 m-2 p-4 w-full'>
+        List will be showing here after fetching.
+    </div>
     }
     
     </>
